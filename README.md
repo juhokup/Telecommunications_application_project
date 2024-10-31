@@ -6,7 +6,8 @@
 Tässä projektissa kehitetään järjestelmä, jossa käytetään nRF5340 kehitysalustaa, Raspberry PItä, Kiihtyvyysanturia ....................
 
 #### Projektin tavoite
-![Tietoliikenneprojektin arkkitehtuuritaulu](Tietoliikenneprojektin arkkitehtuuritaulu.jpeg)
+![Tietoliikenneprojektin arkkitehtuuritaulu](https://github.com/user-attachments/assets/95631cea-6bd1-427b-b753-c2572d411573)
+
 
 ## Projektissa käytettävät teknologiat ja opittavat taidot
 
