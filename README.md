@@ -22,7 +22,7 @@ Tässä projektissa kehitetään järjestelmä, jossa käytetään nRF5340 kehit
 - **Github ja GitBash**
 
 ### Ohjelmointikielet ja kehitysympäristöt
-- **Python**: Koneoppiminen.
+- **Python**: Rasberry pi:n clientti joka vastaanottaa anturidataa ja vie sen tietokantaan. + Koneoppiminen.
 - **SQL**: MySQL tietokanta kiihtyvyysanturin datan keräämiseen.
 - **C**: nRF 5349-DK:n hyödyntämä ohjelmointikieli.
 - **Linux**: Rasberry ja Linux-serverin käyttö.
