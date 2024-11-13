@@ -6,28 +6,8 @@ import mysql.connector
 from mysql.connector import errorcode
 from dotenv import load_dotenv
 
-#load_dotenv()
 i = 0
 # Database connection setup
-#try:
-#    cnx = mysql.connector.connect(
-#        user=os.getenv("dbaccess_rw"),
-#        password=os.getenv("fasdjkf2389vw2c3k234vk2f3"),
-        #host=os.getenv("'dbaccess_rw'@'172.20.241.18'"),
-#	host=os.getenv("localhost"),
-#        database=os.getenv("measurements")
-#    )
-#except mysql.connector.Error as err:
-#    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-#        print("Something is wrong with your user name or password")
-#    elif err.errno == errorcode.ER_BAD_DB_ERROR:
-#        print("Database does not exist")
-#    else:
-#        print(err)
-#else:
-#    print("Connected to the database")
-#    cursor = cnx.cursor()
-
 try:
     cnx = mysql.connector.connect(
         host="172.20.241.18",
@@ -35,8 +15,6 @@ try:
         password="fasdjkf2389vw2c3k234vk2f3",
         database="measurements"
     )
-
-
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("Something is wrong with your user name or password")
@@ -48,8 +26,6 @@ else:
     print("Connected to the database")
     cursor = cnx.cursor()
 
-groupid = 10
-
 direction_values = []
 x_values = []
 y_values = []
@@ -59,7 +35,7 @@ insert_data = ("INSERT INTO rawdata "
                "(Suunta, X, Y, Z)"
                "VALUES (%s, %s, %s, %s)")
 
-# Replace with your device's name and characteristic UUID
+# nRF 5340-DK bluetooth yhteydelle asetettu nimi ja anturidatan characteristic UUID
 device_name = "Ryhma4_Juho"
 characteristic_uuid = "00001526-1212-efde-1523-785feabcd123"
 
@@ -119,9 +95,7 @@ async def connect_and_subscribe(device_address, characteristic_uuid):
 
     # Iterate over the lists and insert data
     for i in range(len(direction_values)):
-        #data = (groupid, direction_values[i], x_values[i], y_values[i], z_values[i])
         data = (direction_values[i], x_values[i], y_values[i], z_values[i])
-
         try:
             # Execute the query
             cursor.execute(insert_data, data)
