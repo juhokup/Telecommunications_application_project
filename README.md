@@ -25,7 +25,7 @@ nRF5340-DK -laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa bluetoo
 ### Ohjelmointikielet ja kehitysympäristöt
 - **Python**: Rasberry pi:n clientti joka vastaanottaa anturidataa ja vie sen tietokantaan. + Koneoppiminen.
 - **SQL**: MySQL tietokanta kiihtyvyysanturin datan keräämiseen.
-- **C**: nRF 5349-DK:n hyödyntämä ohjelmointikieli.
+- **C**: nRF 5340-DK:n hyödyntämä ohjelmointikieli.
 - **Linux**: Rasberry:n ja Linux-serverin käyttö.
 
 ### Tietokantaohjelmistot
