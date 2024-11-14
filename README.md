@@ -4,7 +4,7 @@
 
 ## Kuvaus
 Tässä projektissa kehitetään järjestelmä, jossa käytetään nRF5340 kehitysalustaa, Kiihtyvyysanturia, Raspberry PItä, sekä Linux-serveriä.
-nRF3540-DK -laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa bluetooth yhteydellä Rasberry Pi:lle. Rasberry siirtää vastaanotetun datan Linux-serverillä sijaitsevaan MySQL -tietokantaan.
+nRF5340-DK -laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa bluetooth yhteydellä Rasberry Pi:lle. Rasberry siirtää vastaanotetun datan Linux-serverillä sijaitsevaan MySQL -tietokantaan.
 
 #### Projektin tavoite
 ![Tietoliikenneprojektin arkkitehtuuritaulu](https://github.com/user-attachments/assets/95631cea-6bd1-427b-b753-c2572d411573)
