@@ -48,22 +48,24 @@ static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(SW1_NODE, gpios);
 
 #define RUN_LED_BLINK_INTERVAL 1000
 /* STEP 17 - Define the interval at which you want to send data at */
-#define NOTIFY_INTERVAL         500
+#define NOTIFY_INTERVAL         250
 static bool app_button_state;
 /* STEP 15 - Define the data you want to stream over Bluetooth LE */
 uint32_t app_sensor_value;
 static bool app_button_state;
+int send_count = 0;
 
 static const struct bt_data ad[] = {
 	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
 	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
 
 };
-int suunta = 1;
+int suunta = 6;
+int prev_suunta = 6;
 void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
 	printk("nappia painettu");
-    if(suunta<5){
+    if(suunta<6){
 		suunta++;
 	}else{
 		suunta=1;
@@ -95,39 +97,42 @@ void send_data_thread(void)
 		struct Measurement m = readADCValue();
 		bool val = gpio_pin_get_dt(&button);
 		if(val){
-			if(suunta<5){
+			if(suunta<6){
 				suunta++;
 			}else{
 				suunta=1;
 			}
 		}
+
+		if (prev_suunta != suunta) send_count = 0;
 				
-		for(int i=0;i<4;i++) {
-			
-			if (i==0){
-				app_sensor_value = suunta;
-				my_lbs_send_sensor_notify(app_sensor_value);
-				printk("suunta = %d\n",app_sensor_value);
+		if (send_count<100){	
+			for(int i=0;i<4;i++) {
+				if (i==0){
+					app_sensor_value = suunta;
+					my_lbs_send_sensor_notify(app_sensor_value);
+					printk("suunta = %d\n",app_sensor_value);
 								
-			}else if(i==1){
-				app_sensor_value =  m.x;
-				my_lbs_send_sensor_notify(app_sensor_value);
-				printk("x = %d\n",app_sensor_value);
+				}else if(i==1){
+					app_sensor_value =  m.x;
+					my_lbs_send_sensor_notify(app_sensor_value);
+					printk("x = %d\n",app_sensor_value);
 	
-			}else if(i==2){
-				app_sensor_value = m.y;
-				my_lbs_send_sensor_notify(app_sensor_value);
-				printk("y = %d\n",app_sensor_value);
+				}else if(i==2){
+					app_sensor_value = m.y;
+					my_lbs_send_sensor_notify(app_sensor_value);
+					printk("y = %d\n",app_sensor_value);
 							
-			}else if(i==3){
-				app_sensor_value = m.z;
-				my_lbs_send_sensor_notify(app_sensor_value);
-				printk("z = %d\n",app_sensor_value);
+				}else if(i==3){
+					app_sensor_value = m.z;
+					my_lbs_send_sensor_notify(app_sensor_value);
+					printk("z = %d\n",app_sensor_value);
+				}		
 			}
-					
+			send_count++;
+			prev_suunta = suunta;
 		}
 		k_sleep(K_MSEC(NOTIFY_INTERVAL));
-		
 	}
 		
 }
