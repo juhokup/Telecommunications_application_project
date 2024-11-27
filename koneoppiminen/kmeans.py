@@ -1,10 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D
-import plotly.graph_objs as pgo
-import plotly.express as px
 
 points = pd.read_csv('mittausdata.csv', delimiter=';')
 
