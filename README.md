@@ -3,7 +3,7 @@
 ## Projektiin osallistujat: Juho Kupila ja Jaakko Lukkari
 
 ## Kuvaus
-Tässä projektissa kehitetään järjestelmä (kuva 1), jossa käytetään nRF5340-DK-kehitysalustaa, kiihtyvyysanturia, Raspberry PItä, Linux-serveriä ja K-means-algoritmia. nRF5340-DK-laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa Bluetooth-yhteydellä Raspberry Pille. Raspberry siirtää vastaanotetun datan Linux-serverillä sijaitsevaan MySQL -tietokantaan. Tietokannan vastaanottama data tallennetaan .csv-tiedostoon, jonka avulla kehitetään k-means-algoritmia hyödyntävä Python-sovellus neuroverkon luomiseksi.
+Tässä projektissa kehitetään järjestelmä, jossa käytetään nRF5340-DK-kehitysalustaa, kiihtyvyysanturia, Raspberry PItä, Linux-serveriä ja K-means-algoritmia. nRF5340-DK-laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa Bluetooth-yhteydellä Raspberry Pille. Raspberry siirtää vastaanotetun datan Linux-serverillä sijaitsevaan MySQL -tietokantaan. Tietokannan vastaanottama data tallennetaan .csv-tiedostoon, jonka avulla kehitetään k-means-algoritmia hyödyntävä Python-sovellus neuroverkon luomiseksi.
 
 ## Projektin tavoite
 ![Tietoliikenneprojektin arkkitehtuuritaulu](https://github.com/user-attachments/assets/95631cea-6bd1-427b-b753-c2572d411573)
@@ -12,10 +12,11 @@ Tässä projektissa kehitetään järjestelmä (kuva 1), jossa käytetään nRF5
 
 ### Laitteistot ja alustat
 - **nRF5340-DK**: Kiihtyvyysanturin (GY-61 ADXL335) datan, kuten kiihtyvyyden ja asennon mittaus, sekä langaton tiedonsiirto Raspberrylle 433MHz:n Bluetooth-yhteyttä käyttäen.
-- **Raspberry Pi 3 model b v1.2**: Välittää nRF3540-DK:lta vastaanotettua dataa koulun verkossa olevalle MySQL-palvelimelle HTTP-protokollaa käyttäen.
-- **Kannettava tietokone**: Koodin kirjoitus, tietokannan tarkkailu, etäyhteys Raspberry Pille, sekä Linux-serverille.
 
 ![nRF ja GY-61](https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/main/pictures/nRF%20ja%20GY-61.jpg)
+
+- **Raspberry Pi 3 model b v1.2**: Välittää nRF3540-DK:lta vastaanotettua dataa koulun verkossa olevalle MySQL-palvelimelle HTTP-protokollaa käyttäen.
+- **Kannettava tietokone**: Koodin kirjoitus, tietokannan tarkkailu, etäyhteys Raspberry Pille, sekä Linux-serverille.
 
 ### Käyttöjärjestelmät ja työkalut
 - **Windows**: Windows 11 ja 10.
