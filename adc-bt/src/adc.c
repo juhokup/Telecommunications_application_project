@@ -1,6 +1,3 @@
-
-
-
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/adc.h>
@@ -76,7 +73,7 @@ struct Measurement readADCValue(void)
 	  .buffer_size = sizeof(buf),
     };
 
-    
+    //printk("ADC reading:\n");
 	for (size_t i = 0U; i < ARRAY_SIZE(adc_channels); i++) 
     {
 		int err;
