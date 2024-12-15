@@ -6,14 +6,14 @@
 Tässä projektissa kehitetään järjestelmä, jossa käytetään nRF5340-DK-kehitysalustaa, kiihtyvyysanturia, Raspberry PItä, Linux-serveriä ja K-means-algoritmia. nRF5340-DK-laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa Bluetooth-yhteydellä Raspberry Pille. Raspberry siirtää vastaanotetun datan Linux-serverillä sijaitsevaan MySQL -tietokantaan. Tietokannan vastaanottama data tallennetaan .csv-tiedostoon, jonka avulla kehitetään k-means-algoritmia hyödyntävä Python-sovellus neuroverkon luomiseksi.
 
 ## Projektin tavoite
-![Tietoliikenneprojektin arkkitehtuuritaulu](https://github.com/user-attachments/assets/95631cea-6bd1-427b-b753-c2572d411573)
+<img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/arkkitehtuuritaulu.jpeg" width="400">
 
 ## Projektissa käytettävät teknologiat ja opittavat taidot
 
 ### Laitteistot ja alustat
 - **nRF5340-DK**: Kiihtyvyysanturin (GY-61 ADXL335) datan, kuten kiihtyvyyden ja asennon mittaus, sekä langaton tiedonsiirto Raspberrylle 433MHz:n Bluetooth-yhteyttä käyttäen.
 
-![nRF ja GY-61](https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/main/pictures/nRF%20ja%20GY-61.jpg)
+<img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/nRF%20ja%20GY-61.jpg" width="400">
 
 - **Raspberry Pi 3 model b v1.2**: Välittää nRF3540-DK:lta vastaanotettua dataa koulun verkossa olevalle MySQL-palvelimelle HTTP-protokollaa käyttäen.
 - **Kannettava tietokone**: Koodin kirjoitus, tietokannan tarkkailu, etäyhteys Raspberry Pille, sekä Linux-serverille.
@@ -35,9 +35,11 @@ Tässä projektissa kehitetään järjestelmä, jossa käytetään nRF5340-DK-ke
 - **MySQL**: Itse luotu tietokanta toiselle Linux-serverin osoitteista.
 
 ### Datan analysointi ja koneoppiminen
-- **Neuroverkkoluokittelija**: Käytämme k-means-algoritmia (klusterointimenetelmä) ryhmittelemään kiihtyvyysanturin x-, y- ja z-akseleiden data kuuteen klusterikeskukseen laskemalla niiden etäisyydet lähimmän klusterin satunnaisarvoon. Klusterin uusi keskipiste lasketaan sen saamien datapisteiden keskiarvolla. Datapisteiden jakoa klustereihin ja keskiarvojen laskentaa jatketaan, kunnes keskipisteissä ei havaita suuria muutoksia.
+- **K-means algoritmi**: Käytämme k-means-algoritmia (kuva 3) ryhmittelemään kiihtyvyysanturin x-, y- ja z-akseleiden data kuuteen klusterikeskukseen laskemalla niiden etäisyydet lähimmän klusterin satunnaisarvoon. Klusterin uusi keskipiste lasketaan sen saamien datapisteiden keskiarvolla. Datapisteiden jakoa klustereihin ja keskiarvojen laskentaa jatketaan, kunnes keskipisteissä ei havaita suuria muutoksia.
+  
+- **Neuroverkkoluokittelija**: Luokittelee mittausdatan kahden Dense-kerroksen avulla oikeaan luokkaan lisäämällä siihen neuroverkon kertoimet. Lopputuloksena on todennäköisyys lukemat jokaiselle suunnalle.  Vaihtoehtoinen tapa luokitella mittausdata K-means algoritmin lisäksi.
 
-![K-means-algoritmin kohdistamat datapisteet](https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/main/pictures/k-means.png)
+<img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/k-means.png" width="400">
 
 - **Konfuusiomatriisi**: Konfuusiomatriisi kertoo lajittelualgoritmin toiminnan tehokkuuden.
 - **WireShark**: Laitteiden välisen liikenteen datapakettien tutkimiseen käytetty sovellus.
