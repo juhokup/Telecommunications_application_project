@@ -1,60 +1,69 @@
-# Kiihtyvyysanturidatan suuntaluokittelu k-means-algoritmin avulla
+# Orientation Classification of Accelerometer Data Using the K-Means Algorithm
 
-## Projektiin osallistujat: Juho Kupila ja Jaakko Lukkari
+## Project Participants: Juho Kupila ja Jaakko Lukkari
 
-## Kuvaus
-Tässä projektissa kehitetään järjestelmä ([kuva 1](#kuva1)), jossa käytetään nRF5340-DK-kehitysalustaa, kiihtyvyysanturia, Raspberry PItä, Linux-serveriä ja K-means-algoritmia. nRF5340-DK-laite lähettää siihen kiinnitetyn kiihtyvyysanturin dataa Bluetooth-yhteydellä Raspberry Pille. Raspberry siirtää vastaanotetun datan Linux-serverillä sijaitsevaan MySQL -tietokantaan. Tietokannan vastaanottama data tallennetaan .csv-tiedostoon, jonka avulla kehitetään k-means-algoritmia hyödyntävä Python-sovellus neuroverkon luomiseksi.
+## Description
+In this project, a system ([Figure 1](#kuva1)) is developed that utilizes the nRF5340-DK development board, an accelerometer, a Raspberry Pi, a Linux server, and the K-means algorithm. The nRF5340-DK device transmits accelerometer data from the attached sensor to the Raspberry Pi via a Bluetooth connection. The Raspberry Pi forwards the received data to a MySQL database located on a Linux server. The data received by the database is stored in a `.csv` file, which is then used to develop a Python application utilizing the K-means algorithm to create a neural network.
 
-## Projektin tavoite
-<img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/arkkitehtuuritaulu.jpeg" id="kuva1" width="600">
-<em>Kuva 1. Järjestelmän arkkitehtuuri </em>
 
-## Projektissa käytettävät teknologiat ja opittavat taidot
+## Project Objective
+<img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/arkkitehtuuritaulu.jpeg" id="figure1" width="600">
+<em>Figure 1. System architecture</em>
 
-### Laitteistot ja alustat
-- **nRF5340-DK**: Kiihtyvyysanturin (GY-61 ADXL335) ([kuva 2](#kuva2)) datan, kuten kiihtyvyyden ja asennon mittaus, sekä langaton tiedonsiirto Raspberrylle 433MHz:n Bluetooth-yhteyttä käyttäen.
+## Technologies Used in the Project and Skills to Be Learned
 
-  <img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/nRF%20ja%20GY-61.jpg" id="kuva2" width="400">
-<em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kuva 2. nRF5340-DK ja siihen kiinnitetty kiihtyvyysanturi (GY-61)</em>
+### Hardware and Platforms
 
-- **Raspberry Pi 3 model b v1.2**: Välittää nRF3540-DK:lta vastaanotettua dataa koulun verkossa olevalle MySQL-palvelimelle HTTP-protokollaa käyttäen.
-- **Kannettava tietokone**: Koodin kirjoitus, tietokannan tarkkailu, etäyhteys Raspberry Pille, sekä Linux-serverille.
+- **nRF5340-DK**: Measurement of accelerometer (GY-61 ADXL335) ([Figure 2](#figure2)) data, such as acceleration and orientation, and wireless data transmission to the Raspberry Pi using a 433 MHz Bluetooth connection.
 
-### Käyttöjärjestelmät ja työkalut
-- **Windows**: Windows 11 ja 10.
-- **Linux**: Debian pohjainen 32-bittinen Raspberry Pi OS (uusin versio).
-- **Github ja GitBash**: Projektitiedostojen kokonaisuuden hallintaan.
+  <img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/nRF%20ja%20GY-61.jpg" id="figure2" width="400">
+<em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 2. nRF5340-DK and the attached accelerometer (GY-61)</em>
 
-### Ohjelmointikielet ja kehitysympäristöt
-- **Visual Studio Code**: C- ja Python-koodin kirjoittamiseen käytetty kehitysympäristö.
-- **Google Colab**: Käytetään neuroverkkoluokittelijan koodin kirjoittamiseen.
-- **Python**: Rasberry Pin ohjelma, joka vastaanottaa anturidataa ja vie sen tietokantaan. Koneoppimiseen liittyvät ohjelmat.
-- **SQL**: MySQL-tietokanta kiihtyvyysanturin datan keräämiseen.
-- **C**: nRF 5340-DK:n hyödyntämä ohjelmointikieli, jolla kerätään kiihtyvyysanturin dataa lähetettäväksi Raspberry Pille Bluetooth-yhteydellä.
-- **Linux**: Rasberry:n ja Linux-serverin käyttö.
+- **Raspberry Pi 3 Model B v1.2**: Forwards data received from the nRF5340-DK to the school's MySQL server over the network using the HTTP protocol.
+- **Laptop computer**: Used for writing code, monitoring the database, and establishing remote connections to the Raspberry Pi and the Linux server.
 
-### Tietokantaohjelmistot
-- **MySQL**: Itse luotu tietokanta toiselle Linux-serverin osoitteista.
+### Operating Systems and Tools
 
-### Datan analysointi ja koneoppiminen
-- **K-means algoritmi**: Käytämme k-means-algoritmia ([kuva 3](#kuva3)) ryhmittelemään kiihtyvyysanturin x-, y- ja z-akseleiden data kuuteen klusterikeskukseen laskemalla niiden etäisyydet lähimmän klusterin satunnaisarvoon. Klusterin uusi keskipiste lasketaan sen saamien datapisteiden keskiarvolla. Datapisteiden jakoa klustereihin ja keskiarvojen laskentaa jatketaan, kunnes keskipisteissä ei havaita suuria muutoksia.
-  
-- **Neuroverkkoluokittelija**: Luokittelee mittausdatan kahden Dense-kerroksen avulla oikeaan luokkaan lisäämällä siihen neuroverkon kertoimet. Lopputuloksena on todennäköisyys lukemat jokaiselle suunnalle.  Vaihtoehtoinen tapa luokitella mittausdata K-means algoritmin lisäksi.
+- **Windows**: Windows 11 and 10.
+- **Linux**: Debian-based 32-bit Raspberry Pi OS (latest version).
+- **GitHub and Git Bash**: Used for managing the overall project files.
 
-  <img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/k-means.png" id="kuva3" width="400">
-<em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kuva 3. K-means-algoritmin kohdistamat keskipisteet datapisteiden avulla</em>
+### Programming Languages and Development Environments
 
-- **Konfuusiomatriisi**: Konfuusiomatriisi kertoo lajittelualgoritmin toiminnan tehokkuuden.
-- **WireShark**: Laitteiden välisen liikenteen datapakettien tutkimiseen käytetty sovellus.
+- **Visual Studio Code**: Development environment used for writing C and Python code.
+- **Google Colab**: Used for writing the neural network classifier code.
+- **Python**: Program running on the Raspberry Pi that receives sensor data and stores it in the database. Also used for machine learning–related programs.
+- **SQL**: MySQL database used for collecting accelerometer data.
+- **C**: Programming language used on the nRF5340-DK to collect accelerometer data and transmit it to the Raspberry Pi via Bluetooth.
+- **Linux**: Used on both the Raspberry Pi and the Linux server.
 
-### Versionhallinta ja yhteistyö
-- **Git ja GitHub**: Projektin tiedostokokonaisuuden ja tiedostoversioiden hallintaan.
-- **Kanban-taulu**: Tehtyjen ja keskeneräisten tehtävien seurantaan.
-- **Discord**: Päivittäiseen tiedon- ja tiedostojakoon.
+### Database Software
 
-### Viestintä
-- **Discord**: Opettajan luoma Discord-kanava sekä erilliset yhteistyökanavat.
-- **Sähköposti**:
+- **MySQL**: A self-created database hosted on one of the Linux server’s addresses.
+
+### Data Analysis and Machine Learning
+
+- **K-means Algorithm**: We use the K-means algorithm ([Figure 3](#figure3)) to cluster the accelerometer x-, y-, and z-axis data into six cluster centers by calculating the distance to the nearest randomly initialized cluster centroid. A new cluster centroid is computed as the mean of the data points assigned to that cluster. The assignment of data points and recalculation of centroids is repeated until no significant changes are observed in the cluster centers.
+
+- **Neural Network Classifier**: Classifies the measurement data into the correct category using two Dense layers by applying the neural network’s weights. The final output consists of probability values for each orientation. This serves as an alternative method for classifying measurement data in addition to the K-means algorithm.
+
+
+  <img src="https://github.com/juhokup/Tietoliikenteen-sovellusprojekti/blob/c8e41dba9452d5bc8dad92ff05780554995899ef/Projektin%20muut%20tiedostot/k-means.png" id="figure3" width="400">
+<em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Figure 3. Cluster centroids assigned by the K-means algorithm based on the data points</em>
+
+- **Confusion Matrix**: The confusion matrix indicates the performance and effectiveness of the classification algorithm.
+- **Wireshark**: An application used to analyze data packets in traffic between devices.
+
+### Version Control and Collaboration
+
+- **Git and GitHub**: Used for managing the project’s file structure and version control.
+- **Kanban Board**: Used to track completed and ongoing tasks.
+- **Discord**: Used for daily information and file sharing.
+
+### Communication
+
+- **Discord**: A Discord channel created by the teacher, along with separate collaboration channels.
+- **Email**:
 - Jaakko Lukkari: t3luja00@students.oamk.fi
 - Juho Kupila: t3kuju03@students.oamk.fi
 
